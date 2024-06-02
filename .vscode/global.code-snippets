@@ -1,0 +1,218 @@
+{
+  "function": {
+    "prefix": "fn",
+    "body": [
+      "function ${1:name}(${2:args}) {",
+      "  $3",
+      "}"
+    ],
+    "description": "function方法"
+  },
+  "arrow": {
+    "prefix": "arrowFunction 新建方法",
+    "body": [
+      "const fn = (${1}) => {",
+      "  ${2}",
+      "};"
+    ],
+    "description": "方法"
+  },
+  "import": {
+    "prefix": [
+      "_import",
+      "import"
+    ],
+    "body": "import ${2:name} from '${1:module}'",
+    "description": "import 导入"
+  },
+  "require": {
+    "prefix": [
+      "_require",
+      "require"
+    ],
+    "body": [
+      "const ${1:name} = require('${2:path}');"
+    ],
+    "description": "require 导入模板"
+  },
+  "log": {
+    "prefix": [
+      "_log",
+      "log"
+    ],
+    "body": [
+      "console.log('$1');",
+      "$2"
+    ],
+    "description": "Log output to console"
+  },
+  "forEach": {
+    "prefix": "_forEach",
+    "body": [
+      "${1:array}.forEach((${2:i}) => {",
+      "  ${3}",
+      "})"
+    ],
+    "description": "forEach"
+  },
+  "map": {
+    "prefix": "_map",
+    "body": [
+      "${1:array}.map((${2:item}) => {",
+      "  ${3}",
+      "})"
+    ],
+    "description": "map"
+  },
+  "filter": {
+    "prefix": "_filter",
+    "body": [
+      "${1:array}.filter((${2:item}) => {",
+      "  ${3}",
+      "})"
+    ],
+    "description": "filter 过滤"
+  },
+  "some": {
+    "prefix": [
+      "some",
+      "_some"
+    ],
+    "body": [
+      "${1:array}.some((${2:item}) => {",
+      "  ${3}",
+      "})"
+    ],
+    "description": "some"
+  },
+  "every": {
+    "prefix": [
+      "_every",
+      "every"
+    ],
+    "body": [
+      "${1:array}.every((${2:item}) => {",
+      "  ${3}",
+      "})"
+    ],
+    "description": "every"
+  },
+  "useAttrs": {
+    "prefix": "_useAttrs",
+    "body": [
+      "const attrs = useAttrs()"
+    ],
+    "description": "useAttrs"
+  },
+  "defineProps": {
+    "prefix": "_defineProps",
+    "body": [
+      "const props = defineProps()"
+    ],
+    "description": "defineProps"
+  },
+  "ref": {
+    "prefix": "_ref",
+    "body": [
+      "const $1 = ref(${2})"
+    ],
+    "description": "ref"
+  },
+  "reactive": {
+    "prefix": "_reactive",
+    "body": [
+      "const $1 = reactive(${2})"
+    ],
+    "description": "reactive"
+  },
+  "useToggle": {
+    "prefix": "_useToggle",
+    "body": [
+      "const toggle = useToggle(mode)"
+    ],
+    "description": "_useToggle"
+  },
+  "useElementBounding": {
+    "prefix": "_useElementBounding",
+    "body": [
+      "const rect = useElementBounding(el)"
+    ],
+    "description": "useElementBounding"
+  },
+  "watch": {
+    "prefix": "_watch",
+    "body": [
+      "watch(${1:ref}, (value) => {",
+      "  ${2}",
+      "})"
+    ],
+    "description": "useElementBounding"
+  },
+  "computed": {
+    "prefix": "_computed",
+    "body": [
+      "const result = computed(() => {",
+      "  ${1}",
+      "})"
+    ],
+    "description": "computed"
+  },
+  "useEventListener": {
+    "prefix": "_useEventListener",
+    "body": "useEventListener('resize', update)",
+    "description": "useEventListener"
+  },
+  "watchEffect": {
+    "prefix": "_watchEffect",
+    "body": [
+      "watchEffect(() => {",
+      "  ${1}",
+      "})"
+    ],
+    "description": "watchEffect"
+  },
+  "useStorage": {
+    "prefix": "_useStorage",
+    "body": [
+      "useStorage('${1:key}', ${2:defaultValue})"
+    ],
+    "description": "useStorage"
+  },
+  "forloop": {
+    "prefix": "forloop",
+    "body": [
+      "for (let i = 0; i < ${1:content}; i++) {",
+      " $2",
+      "}"
+    ],
+    "description": "for loop"
+  },
+  "forin": {
+    "prefix": "forin",
+    "body": [
+      "for (const key in ${1:object}) {",
+      "  const val = $1[key]",
+      "  $2",
+      "}"
+    ],
+    "description": "for in"
+  },
+  "forof": {
+    "prefix": "forof",
+    "body": [
+      "for (const item of ${1:array}) {",
+      "  $2",
+      "}"
+    ],
+    "description": "for of"
+  },
+  "forawait": {
+    "prefix": "forawait",
+    "body": [
+      "for await (const item of ${1:array) {",
+      "  $2",
+      "}"
+    ],
+    "description": "for await of"
+  }
+}

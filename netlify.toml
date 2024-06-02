@@ -1,0 +1,12 @@
+[build]
+publish = "docs/.vitepress/dist"
+command = "pnpm install -r && pnpm run docs:build"
+
+[build.environment]
+NODE_OPTIONS = "--max_old_space_size=4096"
+NODE_VERSION = "18"
+
+[[redirects]]
+from = "/*"
+to = "/index.html"
+status = 200

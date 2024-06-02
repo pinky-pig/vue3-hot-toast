@@ -1,0 +1,247 @@
+{
+  "vd": {
+    "prefix": "vd",
+    "body": [
+      "<script setup lang=\"ts\">",
+      "",
+      "</script>",
+      "",
+      "<template>",
+      "  vue",
+      "</template>",
+      "",
+      "<style scoped>",
+      "",
+      "</style>",
+      "",
+    ],
+    "description": "Arvin's Vue3 template"
+  },
+  "vd2": {
+    "prefix": "vd2",
+    "body": [
+      "<template>",
+      "    <div class=\"main\">\n",
+      "    </div>",
+      "</template>",
+      "<script>",
+      "export default {",
+      "   data() {",
+      "      return {",
+      "      }",
+      "   },",
+      "   methods: {",
+      "     clickHandler() {}",
+      "   },",
+      "   mounted(){}",
+      "}",
+      "</script>",
+      "<style lang='css' scoped>",
+      "</style>",
+      "$2"
+    ],
+    "description": "Arvin's Vue2 template"
+  },
+  "template": {
+    "prefix": "temp",
+    "body": [
+      "<template>",
+      " $1",
+      "</template>"
+    ],
+    "description": "template"
+  },
+  "class": {
+    "prefix": "class",
+    "body": [
+      "class=\"${1: }\""
+    ],
+    "description": "class"
+  },
+  "onMounted": {
+    "prefix": "_mount",
+    "body": [
+      "onMounted(() => {",
+      "  $1",
+      "})"
+    ],
+    "description": "onMounted"
+  },
+  "onUnMounted": {
+    "prefix": "_unmount",
+    "body": [
+      "onUnmounted(() => {",
+      "  $1",
+      "})"
+    ],
+    "description": "onUnmounted"
+  },
+  "onUpdated": {
+    "prefix": "_update",
+    "body": [
+      "onUpdated(() => {",
+      "  $1",
+      "})"
+    ],
+    "description": "onUpdated"
+  },
+  "setup": {
+    "prefix": "setup",
+    "body": [
+      "<script setup lang=\"ts\">",
+      "const props = defineProps<{ modelValue: boolean }>()",
+      "</script>\n"
+    ],
+    "description": "Log output to console"
+  },
+  "scriptsetup": {
+    "prefix": "setup",
+    "body": [
+      "<script setup lang=\"ts\">",
+      "const props = defineProps<{ modelValue: boolean }>()",
+      "</script>\n",
+      "<template>",
+      "  <div>",
+      "  </div>",
+      "</template>\n",
+      "<style scoped>",
+      "</style>"
+    ],
+    "description": "setupscriptsetup"
+  },
+  "defineComponent": {
+    "prefix": "_defineComponent",
+    "body": [
+      "<script lang=\"ts\">",
+      "import { defineComponent } from 'vue';",
+      "export default defineComponent({",
+      "  name:'$1',",
+      "})",
+      "</script>"
+    ],
+    "description": "defineComponent"
+  },
+  "useAttrs": {
+    "prefix": "_useAttrs",
+    "body": [
+      "const attrs = useAttrs()"
+    ],
+    "description": "useAttrs"
+  },
+  "defineProps": {
+    "prefix": "_defineProps",
+    "body": [
+      "const props = defineProps<{name:any}>()"
+    ],
+    "description": "defineProps"
+  },
+  "ref": {
+    "prefix": "_ref",
+    "body": [
+      "const $1 = ref(${2})"
+    ],
+    "description": "ref"
+  },
+  "toRef": {
+    "prefix": "_toRef",
+    "body": [
+      "const $1 = toRef(state, '$2')"
+    ],
+    "description": "toRef"
+  },
+  "shallowRef": {
+    "prefix": "_shallowRef",
+    "body": [
+      "const $1 = shallowRef(${2})"
+    ],
+    "description": "shallowRef"
+  },
+  "reactive": {
+    "prefix": "_reactive",
+    "body": [
+      "const $1 = reactive(${2})"
+    ],
+    "description": "reactive"
+  },
+  "shallowReactive": {
+    "prefix": "_shallowReactive",
+    "body": [
+      "const $1 = shallowReactive(${2})"
+    ],
+    "description": "shallowReactive"
+  },
+  "effectScope": {
+    "prefix": "_effectScope",
+    "body": [
+      "const scope = effectScope()",
+      "scope.run(() => {",
+      "  $1",
+      "})",
+      "scope.stop()"
+    ],
+    "description": "effectScope"
+  },
+  "slot": {
+    "prefix": "_slot",
+    "body": [
+      "<slot name=\"$1\"></slot>"
+    ],
+    "description": "_slot"
+  },
+  "ts": {
+    "prefix": "<ts",
+    "body": [
+      "<script lang=\"ts\">",
+      "export default {",
+      "  inheritAttrs: false,",
+      "}",
+      "</script>"
+    ]
+  },
+  "forloop": {
+    "prefix": "forloop",
+    "body": [
+      "for (let i = 0; i < ${1:content}; i++) {",
+      " $2",
+      "}"
+    ],
+    "description": "for loop"
+  },
+  "forin": {
+    "prefix": "forin",
+    "body": [
+      "for (const key in ${1:object}) {",
+      "  const val = $1[key]",
+      "  $2",
+      "}"
+    ],
+    "description": "for in"
+  },
+  "forof": {
+    "prefix": "forof",
+    "body": [
+      "for (const item of ${1:array}) {",
+      "  $2",
+      "}"
+    ],
+    "description": "for of"
+  },
+  "forawait": {
+    "prefix": "forawait",
+    "body": [
+      "for await (const item of ${1:array) {",
+      "  $2",
+      "}"
+    ],
+    "description": "for await of"
+  },
+  "scoped": {
+    "prefix": "scoped style",
+    "body": [
+      "<style scoped>",
+      "  $1",
+      "</style>"
+    ],
+    "description": "for await of"
+  }
+}

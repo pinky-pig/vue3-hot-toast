@@ -1,0 +1,45 @@
+{
+  "name": "pkg_name",
+  "type": "module",
+  "version": "0.0.2-alpha.6.19",
+  "private": false,
+  "author": "arvin",
+  "license": "MIT",
+  "homepage": "pkg_homepage",
+  "repository": {
+    "type": "git",
+    "url": "pkg_repository_url"
+  },
+  "keywords": [
+    "pkg_name",
+    "vue3-bento",
+    "vue-grid-layout",
+    "vue3-drag-bento-component",
+    "drag",
+    "bento",
+    "grid"
+  ],
+  "exports": {
+    ".": {
+      "import": "./pkg_name.es.js",
+      "require": "./pkg_name.umd.cjs"
+    }
+  },
+  "main": "./pkg_name.es.js",
+  "module": "./pkg_name.es.js",
+  "types": "./playground.d.ts",
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org",
+    "access": "public"
+  },
+  "files": [
+    "*"
+  ],
+  "scripts": {
+    "dev": "vite"
+  },
+  "devDependencies": {
+    "typescript": "^4.9.3",
+    "vue": "^3.2.45"
+  }
+}
