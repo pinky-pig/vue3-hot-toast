@@ -1,15 +1,16 @@
 <script setup lang="ts">
-import { Toaster } from '@/components/ui/sonner'
+import toast, { Toaster } from '@arvinn/vue-hot-toast'
+
+function notify() {
+  toast('Here is your toast.')
+}
 </script>
 
 <template>
   <main font-sans p="x-4 y-10" text="center gray-700 dark:gray-200">
-    <RouterView />
+    <button @click="notify">
+      Make me a toast
+    </button>
   </main>
-  <Toaster
-    position="top-center"
-    :expand="false"
-    :rich-colors="false"
-    :close-button="false"
-  />
+  <Toaster />
 </template>

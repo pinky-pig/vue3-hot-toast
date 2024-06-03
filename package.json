@@ -3,6 +3,7 @@
   "version": "0.0.1",
   "private": false,
   "scripts": {
+    "setup": "cd packages && pnpm link --global && cd .. && pnpm link --global @arvinn/vue-hot-toast",
     "dev": "vite --port 3333 --open",
     "lint": "eslint . && npm run lint:fix",
     "lint:fix": "eslint --fix",

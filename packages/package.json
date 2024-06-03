@@ -1,7 +1,7 @@
 {
-  "name": "pkg_name",
+  "name": "@arvinn/vue-hot-toast",
   "type": "module",
-  "version": "0.0.2-alpha.6.19",
+  "version": "0.0.0",
   "private": false,
   "author": "arvin",
   "license": "MIT",
@@ -19,15 +19,6 @@
     "bento",
     "grid"
   ],
-  "exports": {
-    ".": {
-      "import": "./pkg_name.es.js",
-      "require": "./pkg_name.umd.cjs"
-    }
-  },
-  "main": "./pkg_name.es.js",
-  "module": "./pkg_name.es.js",
-  "types": "./playground.d.ts",
   "publishConfig": {
     "registry": "https://registry.npmjs.org",
     "access": "public"
