@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import type { CSSProperties } from 'vue'
 import type { ToastPosition, ToasterProps } from '../core/types'
-import { useToaster } from '../core/useToast'
+import { useToaster } from '../core/useToaster'
 import { prefersReducedMotion } from '../core/utils'
 import { listeners } from '../core/store'
 import ToastWrapper from './ToastWrapper.vue'
