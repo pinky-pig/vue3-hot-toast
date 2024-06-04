@@ -111,8 +111,10 @@ function getAnimationStyle(position: ToastPosition, visible: boolean): CSSProper
     }"
   >
     <ToastIcon :toast="toast" />
+
+    <component :is="toast.message" v-if="(toast.message !== undefined) && (typeof toast.message !== 'string')" />
     <!-- eslint-disable -->
-    <Message :ariaProps="toast.ariaProps">
+    <Message v-else :ariaProps="toast.ariaProps">
       {{ toast.message }}
     </Message>
   </ToastBarBase>

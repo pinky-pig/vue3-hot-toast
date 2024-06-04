@@ -37,7 +37,11 @@ function notify3() {
   })
 }
 function notify4() {
-  toast.loading('Waiting...')
+  const toastId = toast.loading('Waiting...')
+
+  setTimeout(() => {
+    toast.dismiss(toastId)
+  }, 5000)
 }
 function notify5() {
   const component = defineComponent(
@@ -97,6 +101,60 @@ function notify7() {
     },
   )
 }
+function notify8() {
+  toast.dismiss()
+}
+function notify9() {
+  const toastId = toast.loading('Waiting...')
+  setTimeout(() => {
+    toast.remove(toastId)
+
+    setTimeout(() => {
+      toast.remove()
+    }, 1000)
+  }, 5000)
+}
+
+function notify10() {
+  const toastId = toast.loading('Waiting...')
+  setTimeout(() => {
+    toast.success('This worked', {
+      id: toastId,
+    })
+  }, 5000)
+}
+function notify11() {
+  toast.success('Copied to clipboard!', {
+    id: 'clipboard',
+  })
+}
+function notify12() {
+  const component = defineComponent(
+    () => {
+      return () => {
+        return h(
+          'div',
+          {
+            style: {
+              fontSize: '16px',
+              color: '#fff',
+              background: '#000',
+              padding: '10px',
+              borderRadius: '10px',
+            },
+          },
+          '使用默认样式的 Message 信息组件',
+        )
+      }
+    },
+  )
+  toast(
+    markRaw(component),
+    {
+      icon: '🤩',
+    },
+  )
+}
 </script>
 
 <template>
@@ -121,6 +179,24 @@ function notify7() {
     </button>
     <button @click="notify7">
       Advanced
+    </button>
+    <button @click="notify7">
+      Advanced
+    </button>
+    <button @click="notify8">
+      DismissAll
+    </button>
+    <button @click="notify9">
+      RemoveAll
+    </button>
+    <button @click="notify10">
+      Update
+    </button>
+    <button @click="notify11">
+      Customize Id
+    </button>
+    <button @click="notify12">
+      Component
     </button>
   </main>
   <!-- <Toaster /> -->
