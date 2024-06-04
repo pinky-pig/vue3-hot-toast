@@ -35,14 +35,7 @@ const IndicatorWrapper = defineComponent(
       return h(
         'div',
         {
-          style: {
-            position: 'relative',
-            display: 'flex',
-            justifyContent: 'center',
-            alignItems: 'center',
-            minWidth: '20px',
-            minHeight: '20px',
-          },
+          class: 'indicator-wrapper ',
         },
         slots.default?.(),
       )
@@ -55,13 +48,7 @@ const AnimatedIconWrapper = defineComponent(
       return h(
         'div',
         {
-          style: {
-            position: 'relative',
-            transform: 'scale(0.6)',
-            opacity: '0.4',
-            minWidth: '20px',
-            animation: `enter 0.3s 0.12s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards`,
-          },
+          class: 'animated-icon-wrapper',
         },
         slots.default?.(),
       )
@@ -83,7 +70,10 @@ const props = defineProps<ToastIconProps>()
     {{ props.toast.icon }}
   </AnimatedIconWrapper>
 
-  <div v-if="props.toast.type === 'blank'" />
+  <component :is="props.toast.icon" v-else-if="(props.toast.icon !== undefined) && (typeof props.toast.icon !== 'string')" />
+
+  <div v-else-if="props.toast.type === 'blank'" />
+
   <IndicatorWrapper v-else-if="!props.toast.icon">
     <LoaderIcon :props="props.toast.iconTheme" />
     <StatusWrapper v-if="props.toast.type !== 'loading'">
@@ -91,17 +81,33 @@ const props = defineProps<ToastIconProps>()
       <CheckmarkIcon v-else :props="props.toast.iconTheme" />
     </StatusWrapper>
   </IndicatorWrapper>
-  <component :is="props.toast.icon" v-else />
 </template>
 
 <style scoped>
-@keyframes enter {
-  0% {
-    transform: translate3d(0, 80px, 0) scale(0.6);
-    opacity: 0.5;
+.animated-icon-wrapper {
+  position: relative;
+  transform: scale(0.6);
+  opacity: 0.4;
+  min-width: 20px;
+  animation: animated-icon-enter 0.3s 0.12s
+    cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+}
+
+.indicator-wrapper {
+  position: 'relative';
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-width: 20px;
+  min-height: 20px;
+}
+@keyframes animated-icon-enter {
+  from {
+    transform: scale(0.6);
+    opacity: 0.4;
   }
-  100% {
-    transform: translate3d(0, 0, 0) scale(1);
+  to {
+    transform: scale(1);
     opacity: 1;
   }
 }

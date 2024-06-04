@@ -1,5 +1,5 @@
 <script lang="ts">
-import type { CSSProperties } from 'vue'
+import type { CSSProperties, Slots } from 'vue'
 import { defineComponent, h } from 'vue'
 import type { Toast, ToastPosition } from '../core/types'
 import { prefersReducedMotion } from '../core/utils'
@@ -32,7 +32,10 @@ const ToastBarBase = defineComponent(
   },
 )
 const Message = defineComponent(
-  (props, { slots }) => {
+  (
+    props: { ariaProps: Toast['ariaProps'] },
+    { slots }: { slots: Slots },
+  ) => {
     return () => {
       return h(
         'div',
@@ -45,10 +48,15 @@ const Message = defineComponent(
             flex: '1 1 auto',
             whiteSpace: 'pre-line',
           },
+          ...props.ariaProps,
         },
         slots.default?.(),
       )
     }
+  },
+  // 其他选项，例如声明 props 和 emits。
+  {
+    props: ['ariaProps'],
   },
 )
 </script>
@@ -103,7 +111,8 @@ function getAnimationStyle(position: ToastPosition, visible: boolean): CSSProper
     }"
   >
     <ToastIcon :toast="toast" />
-    <Message :props="toast.ariaProps">
+    <!-- eslint-disable -->
+    <Message :ariaProps="toast.ariaProps">
       {{ toast.message }}
     </Message>
   </ToastBarBase>

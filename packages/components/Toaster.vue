@@ -81,7 +81,7 @@ function getPositionStyle(position: ToastPosition, offset: number): CSSPropertie
       :class="t.visible ? 'active-class' : '' "
       @on-height-update="store.handlers.updateHeight"
     >
-      <slot v-if="t.type === 'custom'" />
+      <component :is="t.message" v-if="t.type === 'custom'" />
       <ToastBar v-else :toast="t" :position="t.position || position" />
     </ToastWrapper>
   </div>
