@@ -88,8 +88,8 @@ function getPositionStyle(position: ToastPosition, offset: number): CSSPropertie
       @on-height-update="store.handlers.updateHeight"
     >
       <component :is="t.message" v-if="t.type === 'custom'" />
-      <slot v-if="t.type !== 'custom' && $slots.default" />
-      <slot v-if="t.type !== 'custom' && !$slots.default " name="toastBar">
+      <slot v-else-if="$slots.default" :toast="t" :position="t.position || position" />
+      <slot v-else :toast="t" :position="t.position || position" name="toastBar">
         <ToastBar :toast="t" :position="t.position || position" />
       </slot>
     </ToastWrapper>

@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import toast, { Toaster } from '@arvinn/vue-hot-toast'
+import toast, { ToastBar, Toaster } from '@arvinn/vue-hot-toast'
+import type { Toast } from 'packages/core/types'
 
 function notify1() {
   toast('Here is your toast.')
@@ -155,6 +156,10 @@ function notify12() {
     },
   )
 }
+
+function handleDismiss(t: Toast) {
+  toast.dismiss(t.id)
+}
 </script>
 
 <template>
@@ -199,13 +204,26 @@ function notify12() {
       Component
     </button>
   </main>
-  <!-- <Toaster /> -->
-  <Toaster position="bottom-center" :toast-options="{ duration: 500000 }">
-    <!-- <div>666</div> -->
-    <template #toastBar>
-      8888
-    </template>
-  </Toaster>
+  <Toaster />
+  <!-- <Toaster position="bottom-center" :toast-options="{ duration: 500000 }"> -->
+  <!-- 1. 直接 default slot -->
+  <!-- <div>666</div> -->
+  <!-- 2. toastBar slot 全替换 -->
+  <!-- <template #toastbar>
+      777
+    </template> -->
+  <!-- 3. toastBar slot 但用原来的样式的 -->
+  <!-- <template #toastBar="{ toast, position }">
+      <ToastBar
+        :toast="toast"
+        :position="position"
+      >
+        <button @click="handleDismiss(toast)">
+          X
+        </button>
+      </ToastBar>
+    </template> -->
+  <!-- </Toaster> -->
 </template>
 
 <style scoped>

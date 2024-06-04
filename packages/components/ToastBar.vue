@@ -117,6 +117,8 @@ function getAnimationStyle(position: ToastPosition, visible: boolean): CSSProper
     <Message v-else :ariaProps="toast.ariaProps">
       {{ toast.message }}
     </Message>
+
+    <slot :toast="toast"></slot>
   </ToastBarBase>
 </template>
 
