@@ -200,7 +200,12 @@ function notify12() {
     </button>
   </main>
   <!-- <Toaster /> -->
-  <Toaster :toast-options="{ duration: 500000 }" />
+  <Toaster position="bottom-center" :toast-options="{ duration: 500000 }">
+    <!-- <div>666</div> -->
+    <template #toastBar>
+      8888
+    </template>
+  </Toaster>
 </template>
 
 <style scoped>

@@ -74,8 +74,6 @@ export interface ToasterProps {
   toastOptions?: DefaultToastOptions
   reverseOrder?: boolean
   gutter?: number
-  containerStyle?: CSSProperties
-  containerClassName?: string
 }
 
 export interface ToastWrapperProps {

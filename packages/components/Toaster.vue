@@ -7,6 +7,12 @@ import { listeners } from '../core/store'
 import ToastWrapper from './ToastWrapper.vue'
 import ToastBar from './ToastBar.vue'
 
+/**
+ * 1. 命令式 custom
+ * 2. 直接 children
+ * 3. 插槽 toastBar
+ */
+
 const { reverseOrder, position, toastOptions, gutter } = withDefaults(
   defineProps<ToasterProps>(),
   {
@@ -82,7 +88,10 @@ function getPositionStyle(position: ToastPosition, offset: number): CSSPropertie
       @on-height-update="store.handlers.updateHeight"
     >
       <component :is="t.message" v-if="t.type === 'custom'" />
-      <ToastBar v-else :toast="t" :position="t.position || position" />
+      <slot v-if="t.type !== 'custom' && $slots.default" />
+      <slot v-if="t.type !== 'custom' && !$slots.default " name="toastBar">
+        <ToastBar :toast="t" :position="t.position || position" />
+      </slot>
     </ToastWrapper>
   </div>
 </template>
