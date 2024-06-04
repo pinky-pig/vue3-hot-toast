@@ -11,6 +11,11 @@ import CheckmarkIcon from './Checkmark.vue'
 import type { ErrorTheme } from './Error.vue'
 import ErrorIcon from './Error.vue'
 
+export type IconThemes = Partial<{
+  success: CheckmarkTheme
+  error: ErrorTheme
+  loading: LoaderTheme
+}>
 const StatusWrapper = defineComponent(
   () => {
     return () => {
@@ -65,12 +70,6 @@ const AnimatedIconWrapper = defineComponent(
     }
   },
 )
-
-export type IconThemes = Partial<{
-  success: CheckmarkTheme
-  error: ErrorTheme
-  loading: LoaderTheme
-}>
 </script>
 
 <script setup lang="ts">
@@ -87,17 +86,16 @@ const { icon, type, iconTheme } = toast
   <AnimatedIconWrapper v-if="icon !== undefined && typeof icon === 'string'">
     {{ icon }}
   </AnimatedIconWrapper>
-  <div v-else-if="icon !== undefined && typeof icon !== 'string'" v-html="icon" />
-  <div v-else-if="type === 'blank'" />
-  <IndicatorWrapper v-else>
+
+  <div v-if="type === 'blank'" />
+  <IndicatorWrapper v-else-if="!icon">
     <LoaderIcon :props="iconTheme" />
-    {type !== 'loading' && (
-    <StatusWrapper>
+    <StatusWrapper v-if="type !== 'loading'">
       <ErrorIcon v-if="type === 'error'" :props="iconTheme" />
       <CheckmarkIcon v-else :props="iconTheme" />
     </StatusWrapper>
-    )}
   </IndicatorWrapper>
+  <component :is="icon" v-else />
 </template>
 
 <style scoped>

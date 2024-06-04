@@ -58,77 +58,96 @@ interface ToastBarProps {
   position?: ToastPosition
   style?: CSSProperties
 }
+const props = defineProps<ToastBarProps>()
 
-const { toast, position, style } = defineProps<ToastBarProps>()
+const animationStyle: ComputedRef<CSSProperties> = computed(() => {
+  return props.toast.height
+    ? getAnimationStyle(
+      props.toast.position || props.position || 'top-center',
+      props.toast.visible,
+    )
+    : { opacity: 0 }
+})
 
-function enterAnimation(factor: number) {
-  return `
-    0% {transform: translate3d(0,${factor * -200}%,0) scale(.6); opacity:.5;}
-    100% {transform: translate3d(0,0,0) scale(1); opacity:1;}
-  `
-}
-
-function exitAnimation(factor: number) {
-  return `
-    0% {transform: translate3d(0,0,-1px) scale(1); opacity:1;}
-    100% {transform: translate3d(0,${factor * -150}%,-1px) scale(.6); opacity:0;}
-  `
-}
-
-const fadeInAnimation = `0%{opacity:0;} 100%{opacity:1;}`
-const fadeOutAnimation = `0%{opacity:1;} 100%{opacity:0;}`
-
-const animationStyle: CSSProperties = toast.height
-  ? getAnimationStyle(
-    toast.position || position || 'top-center',
-    toast.visible,
-  )
-  : { opacity: 0 }
+const enterFactor = ref('0%')
+const exitFactor = ref('0%')
 
 function getAnimationStyle(position: ToastPosition, visible: boolean): CSSProperties {
+  // 这里需要根据 prefersReducedMotion() 设置不同的动画效果
   const top = position.includes('top')
   const factor = top ? 1 : -1
 
-  const [enter, exit] = prefersReducedMotion()
-    ? [fadeInAnimation, fadeOutAnimation]
-    : [enterAnimation(factor), exitAnimation(factor)]
+  const hasReduce = prefersReducedMotion()
+
+  if (!hasReduce) {
+    enterFactor.value = `${factor * -200}%`
+    exitFactor.value = `${factor * -150}%`
+  }
 
   return {
     animation: visible
-      ? `enter 0.35s cubic-bezier(.21,1.02,.73,1) forwards`
-      : `exit 0.4s forwards cubic-bezier(.06,.71,.55,1)`,
+      ? hasReduce ? 'fadeInAnimation' : 'enterAnimation 0.35s cubic-bezier(.21,1.02,.73,1) forwards'
+      : hasReduce ? 'fadeOutAnimation' : 'exitAnimation 0.4s forwards cubic-bezier(.06,.71,.55,1)',
   }
 }
 </script>
 
 <template>
   <ToastBarBase
+    class="toast-bar"
     :style="{
       ...animationStyle,
       ...style,
       ...toast.style,
     }"
   >
-    <slot name="icon">
-      <ToastIcon :toast="toast" />
-    </slot>
-    <slot name="message">
-      <Message :props="toast.ariaProps">
-        {{ toast.message }}
-      </Message>
-    </slot>
+    <ToastIcon :toast="toast" />
+    <Message :props="toast.ariaProps">
+      {{ toast.message }}
+    </Message>
   </ToastBarBase>
 </template>
 
-<style scoped>
-@keyframes enter {
+<style>
+.toast-bar {
+  --enterFactor: v-bind(enterFactor);
+  --exitFactor: v-bind(exitFactor);
+}
+@keyframes fadeInAnimation {
   0% {
-    transform: translate3d(0, 80px, 0) scale(0.6);
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+@keyframes fadeOutAnimation {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes enterAnimation {
+  0% {
+    transform: translate3d(0, var(--enterFactor), 0) scale(0.6);
     opacity: 0.5;
   }
   100% {
     transform: translate3d(0, 0, 0) scale(1);
     opacity: 1;
+  }
+}
+@keyframes exitAnimation {
+  0% {
+    transform: translate3d(0, 0, -1px) scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: translate3d(0, var(--exitFactor), -1px) scale(0.6);
+    opacity: 0;
   }
 }
 </style>

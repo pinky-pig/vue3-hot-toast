@@ -175,22 +175,33 @@ export const defaultTimeouts: {
 }
 
 // 这个是所有的 toast 数组状态
-export const memoryState: Ref<State> = ref({ toasts: [], pausedAt: undefined })
+let memoryState: State = { toasts: [], pausedAt: undefined }
+
+// 这个目的是触发事件监听，watch 这个值
+export const listeners: Ref<Array<number>> = ref([])
 
 // 分发事件，将 action 传递给 reducer 函数，然后更新 memoryState
 export function dispatch(action: Action) {
-  const reduceMemoryState = reducer(memoryState.value, action)
-  if (!areEqual(memoryState.value, reduceMemoryState)) {
-    memoryState.value = reduceMemoryState
+  const reduceMemoryState = reducer(memoryState, action)
+
+  if (!areEqual(reduceMemoryState, memoryState)) {
+    memoryState = reduceMemoryState
+    if (memoryState.toasts.length === 0) {
+      listeners.value.splice(0, listeners.value.length)
+    }
+    else {
+      listeners.value.push(0)
+    }
   }
 }
+
 function areEqual(obj1: State, obj2: State) {
   return JSON.stringify(obj1) === JSON.stringify(obj2)
 }
 
 // 创建一个 store ，每个 toast 都有一个
 export function useStore(toastOptions: DefaultToastOptions = {}): State {
-  const mergedToasts = memoryState.value.toasts.map(t => ({
+  const mergedToasts = memoryState.toasts.map(t => ({
     ...toastOptions,
     ...toastOptions[t.type],
     ...t,
@@ -207,7 +218,7 @@ export function useStore(toastOptions: DefaultToastOptions = {}): State {
   }))
 
   return {
-    ...memoryState.value,
+    ...memoryState,
     toasts: mergedToasts,
   }
 }

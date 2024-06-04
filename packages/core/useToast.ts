@@ -20,13 +20,13 @@ function startPause() {
 export function useToaster(toastOptions?: DefaultToastOptions) {
   const { toasts, pausedAt } = useStore(toastOptions)
 
-  watchEffect((onInvalidate) => {
+  nextTick(() => {
     if (pausedAt) {
       return
     }
 
     const now = Date.now()
-    const timeouts = toasts.map((t) => {
+    toasts.map((t) => {
       if (t.duration === Number.POSITIVE_INFINITY) {
         return
       }
@@ -38,13 +38,10 @@ export function useToaster(toastOptions?: DefaultToastOptions) {
         if (t.visible) {
           toast.dismiss(t.id)
         }
-        return
       }
-      return setTimeout(() => toast.dismiss(t.id), durationLeft)
-    })
-
-    onInvalidate(() => {
-      timeouts.forEach(timeout => timeout && clearTimeout(timeout))
+      else {
+        return setTimeout(() => toast.dismiss(t.id), durationLeft)
+      }
     })
   })
 

@@ -3,17 +3,11 @@ import type { CSSProperties } from 'vue'
 import type { ToastPosition, ToasterProps } from '../core/types'
 import { useToaster } from '../core/useToast'
 import { prefersReducedMotion } from '../core/utils'
-import { memoryState } from '../core/store'
+import { listeners } from '../core/store'
 import ToastWrapper from './ToastWrapper.vue'
 import ToastBar from './ToastBar.vue'
 
-const {
-  reverseOrder,
-  position,
-  toastOptions,
-  gutter,
-  containerStyle,
-} = withDefaults(
+const { reverseOrder, position, toastOptions, gutter } = withDefaults(
   defineProps<ToasterProps>(),
   {
     position: 'top-center',
@@ -24,8 +18,10 @@ const DEFAULT_OFFSET = 16
 
 const store = ref(useToaster(toastOptions))
 
-watch(memoryState, () => {
+watch(listeners, () => {
   store.value = useToaster(toastOptions)
+}, {
+  deep: true,
 })
 
 function getPositionStyle(position: ToastPosition, offset: number): CSSProperties {
@@ -65,7 +61,6 @@ function getPositionStyle(position: ToastPosition, offset: number): CSSPropertie
       right: `${DEFAULT_OFFSET}px`,
       bottom: `${DEFAULT_OFFSET}px`,
       pointerEvents: 'none',
-      ...containerStyle,
     }"
     @mouseenter="store.handlers.startPause"
     @mouseleave="store.handlers.endPause"
@@ -86,11 +81,8 @@ function getPositionStyle(position: ToastPosition, offset: number): CSSPropertie
       :class="t.visible ? 'active-class' : '' "
       @on-height-update="store.handlers.updateHeight"
     >
-      <!-- {{ t.type === 'custom' && resolveValue(t.message, t) }} -->
-      <slot v-if="t.type !== 'custom'">
-        <!-- <ToastBar :toast="t" :position="t.position || position" /> -->
-        {{ t.message }}
-      </slot>
+      <slot v-if="t.type === 'custom'" />
+      <ToastBar v-else :toast="t" :position="t.position || position" />
     </ToastWrapper>
   </div>
 </template>
