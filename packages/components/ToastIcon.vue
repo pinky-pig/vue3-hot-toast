@@ -1,8 +1,6 @@
 <script lang="ts">
-import type { CSSProperties } from 'vue'
-import { defineComponent, h, ref } from 'vue'
-import type { Toast, ToastPosition } from '../core/types'
-import { prefersReducedMotion } from '../core/utils'
+import { defineComponent, h } from 'vue'
+import type { Toast } from '../core/types'
 
 import type { LoaderTheme } from './Loader.vue'
 import LoaderIcon from './Loader.vue'
@@ -17,7 +15,7 @@ export type IconThemes = Partial<{
   loading: LoaderTheme
 }>
 const StatusWrapper = defineComponent(
-  () => {
+  (props, { slots }) => {
     return () => {
       return h(
         'div',
@@ -26,13 +24,13 @@ const StatusWrapper = defineComponent(
             position: 'absolute',
           },
         },
-        h('slot', null),
+        slots.default?.(),
       )
     }
   },
 )
 const IndicatorWrapper = defineComponent(
-  () => {
+  (props, { slots }) => {
     return () => {
       return h(
         'div',
@@ -46,13 +44,13 @@ const IndicatorWrapper = defineComponent(
             minHeight: '20px',
           },
         },
-        h('slot', null),
+        slots.default?.(),
       )
     }
   },
 )
 const AnimatedIconWrapper = defineComponent(
-  () => {
+  (props, { slots }) => {
     return () => {
       return h(
         'div',
@@ -65,7 +63,7 @@ const AnimatedIconWrapper = defineComponent(
             animation: `enter 0.3s 0.12s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards`,
           },
         },
-        h('slot', null),
+        slots.default?.(),
       )
     }
   },
@@ -77,25 +75,23 @@ interface ToastIconProps {
   toast: Toast
 }
 
-const { toast } = defineProps<ToastIconProps>()
-
-const { icon, type, iconTheme } = toast
+const props = defineProps<ToastIconProps>()
 </script>
 
 <template>
-  <AnimatedIconWrapper v-if="icon !== undefined && typeof icon === 'string'">
-    {{ icon }}
+  <AnimatedIconWrapper v-if="props.toast.icon !== undefined && typeof props.toast.icon === 'string'">
+    {{ props.toast.icon }}
   </AnimatedIconWrapper>
 
-  <div v-if="type === 'blank'" />
-  <IndicatorWrapper v-else-if="!icon">
-    <LoaderIcon :props="iconTheme" />
-    <StatusWrapper v-if="type !== 'loading'">
-      <ErrorIcon v-if="type === 'error'" :props="iconTheme" />
-      <CheckmarkIcon v-else :props="iconTheme" />
+  <div v-if="props.toast.type === 'blank'" />
+  <IndicatorWrapper v-else-if="!props.toast.icon">
+    <LoaderIcon :props="props.toast.iconTheme" />
+    <StatusWrapper v-if="props.toast.type !== 'loading'">
+      <ErrorIcon v-if="props.toast.type === 'error'" :props="props.toast.iconTheme" />
+      <CheckmarkIcon v-else :props="props.toast.iconTheme" />
     </StatusWrapper>
   </IndicatorWrapper>
-  <component :is="icon" v-else />
+  <component :is="props.toast.icon" v-else />
 </template>
 
 <style scoped>

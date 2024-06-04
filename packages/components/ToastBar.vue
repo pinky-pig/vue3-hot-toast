@@ -6,7 +6,8 @@ import { prefersReducedMotion } from '../core/utils'
 import ToastIcon from './ToastIcon.vue'
 
 const ToastBarBase = defineComponent(
-  () => {
+  (props, { slots }) => {
+    // 这里是 setup
     return () => {
       return h(
         'div',
@@ -25,13 +26,13 @@ const ToastBarBase = defineComponent(
             borderRadius: '8px',
           },
         },
-        h('slot', null),
+        slots.default?.(),
       )
     }
   },
 )
 const Message = defineComponent(
-  () => {
+  (props, { slots }) => {
     return () => {
       return h(
         'div',
@@ -45,7 +46,7 @@ const Message = defineComponent(
             whiteSpace: 'pre-line',
           },
         },
-        h('slot', null),
+        slots.default?.(),
       )
     }
   },

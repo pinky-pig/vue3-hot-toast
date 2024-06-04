@@ -2,7 +2,7 @@
 import toast, { Toaster } from '@arvinn/vue-hot-toast'
 
 function notify() {
-  toast('Here is your toast.')
+  toast.error('Here is your toast.')
 }
 </script>
 
@@ -12,5 +12,6 @@ function notify() {
       Make me a toast
     </button>
   </main>
-  <Toaster />
+  <!-- <Toaster /> -->
+  <Toaster :toast-options="{ duration: 500000 }" />
 </template>

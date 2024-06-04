@@ -80,8 +80,6 @@ export interface ToasterProps {
 
 export interface ToastWrapperProps {
   id: string
-  className?: string
-  style?: CSSProperties
 }
 export interface ToastWrapperEmits {
   onHeightUpdate: (id: string, height: number) => void
