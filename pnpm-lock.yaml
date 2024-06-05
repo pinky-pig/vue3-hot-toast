@@ -8,7 +8,7 @@ importers:
 
   .:
     dependencies:
-      '@arvinn/vue-hot-toast':
+      vue3-hot-toast:
         specifier: workspace:^
         version: link:packages
     devDependencies:

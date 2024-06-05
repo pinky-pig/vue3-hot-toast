@@ -1,60 +1,50 @@
 <script lang="ts">
 import { defineComponent, h } from 'vue'
+import LoaderIcon, { type LoaderTheme } from './Loader.vue'
+import CheckmarkIcon, { type CheckmarkTheme } from './Checkmark.vue'
+import ErrorIcon, { type ErrorTheme } from './Error.vue'
 import type { Toast } from '../core/types'
-
-import type { LoaderTheme } from './Loader.vue'
-import LoaderIcon from './Loader.vue'
-import type { CheckmarkTheme } from './Checkmark.vue'
-import CheckmarkIcon from './Checkmark.vue'
-import type { ErrorTheme } from './Error.vue'
-import ErrorIcon from './Error.vue'
 
 export type IconThemes = Partial<{
   success: CheckmarkTheme
   error: ErrorTheme
   loading: LoaderTheme
 }>
-const StatusWrapper = defineComponent(
-  (props, { slots }) => {
-    return () => {
-      return h(
-        'div',
-        {
-          style: {
-            position: 'absolute',
-          },
+const StatusWrapper = defineComponent((props, { slots }) => {
+  return () => {
+    return h(
+      'div',
+      {
+        style: {
+          position: 'absolute',
         },
-        slots.default?.(),
-      )
-    }
-  },
-)
-const IndicatorWrapper = defineComponent(
-  (props, { slots }) => {
-    return () => {
-      return h(
-        'div',
-        {
-          class: 'indicator-wrapper ',
-        },
-        slots.default?.(),
-      )
-    }
-  },
-)
-const AnimatedIconWrapper = defineComponent(
-  (props, { slots }) => {
-    return () => {
-      return h(
-        'div',
-        {
-          class: 'animated-icon-wrapper',
-        },
-        slots.default?.(),
-      )
-    }
-  },
-)
+      },
+      slots.default?.(),
+    )
+  }
+})
+const IndicatorWrapper = defineComponent((props, { slots }) => {
+  return () => {
+    return h(
+      'div',
+      {
+        class: 'indicator-wrapper ',
+      },
+      slots.default?.(),
+    )
+  }
+})
+const AnimatedIconWrapper = defineComponent((props, { slots }) => {
+  return () => {
+    return h(
+      'div',
+      {
+        class: 'animated-icon-wrapper',
+      },
+      slots.default?.(),
+    )
+  }
+})
 </script>
 
 <script setup lang="ts">
@@ -66,18 +56,30 @@ const props = defineProps<ToastIconProps>()
 </script>
 
 <template>
-  <AnimatedIconWrapper v-if="props.toast.icon !== undefined && typeof props.toast.icon === 'string'">
+  <AnimatedIconWrapper
+    v-if="
+      props.toast.icon !== undefined && typeof props.toast.icon === 'string'
+    "
+  >
     {{ props.toast.icon }}
   </AnimatedIconWrapper>
 
-  <component :is="props.toast.icon" v-else-if="(props.toast.icon !== undefined) && (typeof props.toast.icon !== 'string')" />
+  <component
+    :is="props.toast.icon"
+    v-else-if="
+      props.toast.icon !== undefined && typeof props.toast.icon !== 'string'
+    "
+  />
 
   <div v-else-if="props.toast.type === 'blank'" />
 
   <IndicatorWrapper v-else-if="!props.toast.icon">
     <LoaderIcon :props="props.toast.iconTheme" />
     <StatusWrapper v-if="props.toast.type !== 'loading'">
-      <ErrorIcon v-if="props.toast.type === 'error'" :props="props.toast.iconTheme" />
+      <ErrorIcon
+        v-if="props.toast.type === 'error'"
+        :props="props.toast.iconTheme"
+      />
       <CheckmarkIcon v-else :props="props.toast.iconTheme" />
     </StatusWrapper>
   </IndicatorWrapper>

@@ -1,31 +1,31 @@
 {
-  "name": "@arvinn/vue-hot-toast",
-  "type": "module",
+  "name": "vue3-hot-toast",
   "version": "0.0.0",
   "private": false,
-  "author": "arvin",
+  "type": "module",
+  "keywords": [
+    "vue3-hot-toast",
+    "vue3-toast",
+    "vue-toast",
+    "vue-hot-toast",
+    "toast",
+    "vue",
+    "vue3"
+  ],
   "license": "MIT",
-  "homepage": "pkg_homepage",
+  "homepage": "https://github.com/pinky-pig/vue3-hot-toast",
   "repository": {
     "type": "git",
-    "url": "pkg_repository_url"
+    "url": "https://github.com/pinky-pig/vue3-hot-toast"
   },
-  "keywords": [
-    "pkg_name",
-    "vue3-bento",
-    "vue-grid-layout",
-    "vue3-drag-bento-component",
-    "drag",
-    "bento",
-    "grid"
+  "author": "arvin",
+  "files": [
+    "*"
   ],
   "publishConfig": {
     "registry": "https://registry.npmjs.org",
     "access": "public"
   },
-  "files": [
-    "*"
-  ],
   "scripts": {
     "dev": "vite"
   },

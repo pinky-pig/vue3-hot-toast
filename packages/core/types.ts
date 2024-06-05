@@ -17,15 +17,18 @@ export interface IconTheme {
 }
 
 export type ValueFunction<TValue, TArg> = (arg: TArg) => TValue
-export type ValueOrFunction<TValue, TArg> =
-  | TValue
-  | ValueFunction<TValue, TArg>
+export type ValueOrFunction<TValue, TArg> = TValue | ValueFunction<TValue, TArg>
 
-function isFunction<TValue, TArg>(valOrFunction: ValueOrFunction<TValue, TArg>): valOrFunction is ValueFunction<TValue, TArg> {
+function isFunction<TValue, TArg>(
+  valOrFunction: ValueOrFunction<TValue, TArg>,
+): valOrFunction is ValueFunction<TValue, TArg> {
   return typeof valOrFunction === 'function'
 }
 
-export function resolveValue<TValue, TArg>(valOrFunction: ValueOrFunction<TValue, TArg>, arg: TArg): TValue {
+export function resolveValue<TValue, TArg>(
+  valOrFunction: ValueOrFunction<TValue, TArg>,
+  arg: TArg,
+): TValue {
   return isFunction(valOrFunction) ? valOrFunction(arg) : valOrFunction
 }
 
@@ -39,7 +42,7 @@ export interface Toast {
   position?: ToastPosition
 
   ariaProps: {
-    'role': 'status' | 'alert'
+    role: 'status' | 'alert'
     'aria-live': 'assertive' | 'off' | 'polite'
   }
 
@@ -66,7 +69,7 @@ export type ToastOptions = Partial<
   >
 >
 export type DefaultToastOptions = ToastOptions & {
-  [key in ToastType]?: ToastOptions;
+  [key in ToastType]?: ToastOptions
 }
 
 export interface ToasterProps {

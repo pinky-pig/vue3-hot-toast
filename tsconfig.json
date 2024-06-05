@@ -7,15 +7,11 @@
     "module": "ESNext",
     "moduleResolution": "bundler",
     "paths": {
-      "@arvinn/vue-hot-toast": ["node_modules/@arvinn/vue-hot-toast/index.ts"],
       "~/*": ["src/*"],
       "@/*": ["./src/*"]
     },
     "resolveJsonModule": true,
-    "types": [
-      "vite/client",
-      "unplugin-vue-router/client"
-    ],
+    "types": ["vite/client", "unplugin-vue-router/client"],
     "allowJs": true,
     "strict": true,
     "strictNullChecks": true,
@@ -34,9 +30,5 @@
     "components.d.ts",
     "auto-imports.d.ts"
   ],
-  "exclude": [
-    "dist",
-    "node_modules",
-    "eslint.config.js"
-  ]
+  "exclude": ["dist", "node_modules", "eslint.config.js"]
 }

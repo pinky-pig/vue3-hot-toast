@@ -1,6 +1,5 @@
 <script setup lang="ts">
-import toast, { ToastBar, Toaster } from '@arvinn/vue-hot-toast'
-import type { Toast } from 'packages/core/types'
+import toast, { Toaster } from 'vue3-hot-toast'
 
 function notify1() {
   toast('Here is your toast.')
@@ -32,7 +31,7 @@ function notify3() {
 
     // Aria
     ariaProps: {
-      'role': 'status',
+      role: 'status',
       'aria-live': 'polite',
     },
   })
@@ -45,25 +44,23 @@ function notify4() {
   }, 5000)
 }
 function notify5() {
-  const component = defineComponent(
-    () => {
-      return () => {
-        return h(
-          'div',
-          {
-            style: {
-              fontSize: '16px',
-              color: '#fff',
-              background: '#000',
-              padding: '10px',
-              borderRadius: '10px',
-            },
+  const component = defineComponent(() => {
+    return () => {
+      return h(
+        'div',
+        {
+          style: {
+            fontSize: '16px',
+            color: '#fff',
+            background: '#000',
+            padding: '10px',
+            borderRadius: '10px',
           },
-          66666666666,
-        )
-      }
-    },
-  )
+        },
+        66666666666,
+      )
+    }
+  })
   toast.custom(markRaw(component))
 }
 async function notify6() {
@@ -130,79 +127,48 @@ function notify11() {
   })
 }
 function notify12() {
-  const component = defineComponent(
-    () => {
-      return () => {
-        return h(
-          'div',
-          {
-            style: {
-              fontSize: '16px',
-              color: '#fff',
-              background: '#000',
-              padding: '10px',
-              borderRadius: '10px',
-            },
+  const component = defineComponent(() => {
+    return () => {
+      return h(
+        'div',
+        {
+          style: {
+            fontSize: '16px',
+            color: '#fff',
+            background: '#000',
+            padding: '10px',
+            borderRadius: '10px',
           },
-          '使用默认样式的 Message 信息组件',
-        )
-      }
-    },
-  )
-  toast(
-    markRaw(component),
-    {
-      icon: '🤩',
-    },
-  )
+        },
+        '使用默认样式的 Message 信息组件',
+      )
+    }
+  })
+  toast(markRaw(component), {
+    icon: '🤩',
+  })
 }
 
-function handleDismiss(t: Toast) {
-  toast.dismiss(t.id)
-}
+// function handleDismiss(t: Toast) {
+//   toast.dismiss(t.id)
+// }
 </script>
 
 <template>
-  <main class=" flex flex-row flex-wrap gap-3">
-    <button @click="notify1">
-      Blank
-    </button>
-    <button @click="notify2">
-      Error
-    </button>
-    <button @click="notify3">
-      Optional
-    </button>
-    <button @click="notify4">
-      Loading
-    </button>
-    <button @click="notify5">
-      Custom
-    </button>
-    <button @click="notify6">
-      Promise
-    </button>
-    <button @click="notify7">
-      Advanced
-    </button>
-    <button @click="notify7">
-      Advanced
-    </button>
-    <button @click="notify8">
-      DismissAll
-    </button>
-    <button @click="notify9">
-      RemoveAll
-    </button>
-    <button @click="notify10">
-      Update
-    </button>
-    <button @click="notify11">
-      Customize Id
-    </button>
-    <button @click="notify12">
-      Component
-    </button>
+  <main class="flex flex-row flex-wrap gap-3">
+    <button @click="notify1">Blank</button>
+    <button @click="notify2">Error</button>
+    <button @click="notify3">Optional</button>
+    <button @click="notify4">Loading</button>
+    <button @click="notify5">Custom</button>
+    <button @click="notify6">Promise</button>
+    <button @click="notify7">Advanced</button>
+    <button @click="notify7">Advanced</button>
+    <button @click="notify8">DismissAll</button>
+    <button @click="notify9">RemoveAll</button>
+    <button @click="notify10">Update</button>
+    <button @click="notify11">Customize Id</button>
+    <button @click="notify12">Component</button>
   </main>
   <Toaster />
   <!-- <Toaster position="bottom-center" :toast-options="{ duration: 500000 }"> -->

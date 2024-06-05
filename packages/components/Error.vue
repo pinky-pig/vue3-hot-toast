@@ -19,10 +19,7 @@ withDefaults(defineProps<ErrorTheme>(), {
 </template>
 
 <style scoped>
-
-
 .error {
-
   width: 20px;
   opacity: 0;
   height: 20px;
@@ -55,38 +52,37 @@ withDefaults(defineProps<ErrorTheme>(), {
     animation-delay: 180ms;
     transform: rotate(90deg);
   }
-  
 }
 
 @keyframes circleAnimation {
   from {
-  transform: scale(0) rotate(45deg);
-	opacity: 0;
-}
-to {
- transform: scale(1) rotate(45deg);
-  opacity: 1;
-}
+    transform: scale(0) rotate(45deg);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1) rotate(45deg);
+    opacity: 1;
+  }
 }
 
 @keyframes firstLineAnimation {
   from {
-  transform: scale(0);
-  opacity: 0;
-}
-to {
-  transform: scale(1);
-  opacity: 1;
-}
+    transform: scale(0);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
 }
 @keyframes secondLineAnimation {
   from {
-  transform: scale(0) rotate(90deg);
-	opacity: 0;
-}
-to {
-  transform: scale(1) rotate(90deg);
-	opacity: 1;
-}
+    transform: scale(0) rotate(90deg);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1) rotate(90deg);
+    opacity: 1;
+  }
 }
 </style>

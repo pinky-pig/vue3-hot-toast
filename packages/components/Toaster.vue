@@ -1,11 +1,11 @@
 <script setup lang="ts">
-import type { CSSProperties } from 'vue'
-import type { ToastPosition, ToasterProps } from '../core/types'
-import { useToaster } from '../core/useToaster'
+import { useToaster } from '../core/use-toaster'
 import { prefersReducedMotion } from '../core/utils'
 import { listeners } from '../core/store'
 import ToastWrapper from './ToastWrapper.vue'
 import ToastBar from './ToastBar.vue'
+import type { ToastPosition, ToasterProps } from '../core/types'
+import type { CSSProperties } from 'vue'
 
 /**
  * 1. 命令式 custom
@@ -24,13 +24,20 @@ const DEFAULT_OFFSET = 16
 
 const store = ref(useToaster(toastOptions))
 
-watch(listeners, () => {
-  store.value = useToaster(toastOptions)
-}, {
-  deep: true,
-})
+watch(
+  listeners,
+  () => {
+    store.value = useToaster(toastOptions)
+  },
+  {
+    deep: true,
+  },
+)
 
-function getPositionStyle(position: ToastPosition, offset: number): CSSProperties {
+function getPositionStyle(
+  position: ToastPosition,
+  offset: number,
+): CSSProperties {
   const top = position.includes('top')
   const verticalStyle: CSSProperties = top ? { top: 0 } : { bottom: 0 }
   const horizontalStyle: CSSProperties = position.includes('center')
@@ -76,20 +83,31 @@ function getPositionStyle(position: ToastPosition, offset: number): CSSPropertie
       v-for="t in store.toasts"
       :id="t.id"
       :key="t.id"
-      :style="getPositionStyle(
-        t.position || position,
-        store.handlers.calculateOffset(t, {
-          reverseOrder,
-          gutter,
-          defaultPosition: position,
-        }),
-      )"
-      :class="t.visible ? 'active-class' : '' "
+      :style="
+        getPositionStyle(
+          t.position || position,
+          store.handlers.calculateOffset(t, {
+            reverseOrder,
+            gutter,
+            defaultPosition: position,
+          }),
+        )
+      "
+      :class="t.visible ? 'active-class' : ''"
       @on-height-update="store.handlers.updateHeight"
     >
       <component :is="t.message" v-if="t.type === 'custom'" />
-      <slot v-else-if="$slots.default" :toast="t" :position="t.position || position" />
-      <slot v-else :toast="t" :position="t.position || position" name="toastBar">
+      <slot
+        v-else-if="$slots.default"
+        :toast="t"
+        :position="t.position || position"
+      />
+      <slot
+        v-else
+        :toast="t"
+        :position="t.position || position"
+        name="toastBar"
+      >
         <ToastBar :toast="t" :position="t.position || position" />
       </slot>
     </ToastWrapper>

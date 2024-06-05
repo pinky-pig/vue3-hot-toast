@@ -33,9 +33,7 @@ export default {
         },
       ],
       dts: 'src/typings/auto-imports.d.ts',
-      dirs: [
-        './src/composables',
-      ],
+      dirs: ['./src/composables'],
       vueTemplate: true,
     }),
     Components({

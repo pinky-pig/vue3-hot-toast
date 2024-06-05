@@ -1,41 +1,36 @@
 <script lang="ts">
-import type { CSSProperties, Slots } from 'vue'
-import { defineComponent, h } from 'vue'
-import type { Toast, ToastPosition } from '../core/types'
+import { type CSSProperties, type Slots, defineComponent, h } from 'vue'
 import { prefersReducedMotion } from '../core/utils'
 import ToastIcon from './ToastIcon.vue'
+import type { Toast, ToastPosition } from '../core/types'
 
-const ToastBarBase = defineComponent(
-  (props, { slots }) => {
-    // 这里是 setup
-    return () => {
-      return h(
-        'div',
-        {
-          style: {
-            display: 'flex',
-            alignItems: 'center',
-            background: '#fff',
-            color: '#363636',
-            lineHeight: 1.3,
-            willChange: 'transform',
-            boxShadow: '0 3px 10px rgba(0, 0, 0, 0.1), 0 3px 3px rgba(0, 0, 0, 0.05)',
-            maxWidth: '350px',
-            pointerEvents: 'auto',
-            padding: '8px 10px',
-            borderRadius: '8px',
-          },
+const ToastBarBase = defineComponent((props, { slots }) => {
+  // 这里是 setup
+  return () => {
+    return h(
+      'div',
+      {
+        style: {
+          display: 'flex',
+          alignItems: 'center',
+          background: '#fff',
+          color: '#363636',
+          lineHeight: 1.3,
+          willChange: 'transform',
+          boxShadow:
+            '0 3px 10px rgba(0, 0, 0, 0.1), 0 3px 3px rgba(0, 0, 0, 0.05)',
+          maxWidth: '350px',
+          pointerEvents: 'auto',
+          padding: '8px 10px',
+          borderRadius: '8px',
         },
-        slots.default?.(),
-      )
-    }
-  },
-)
+      },
+      slots.default?.(),
+    )
+  }
+})
 const Message = defineComponent(
-  (
-    props: { ariaProps: Toast['ariaProps'] },
-    { slots }: { slots: Slots },
-  ) => {
+  (props: { ariaProps: Toast['ariaProps'] }, { slots }: { slots: Slots }) => {
     return () => {
       return h(
         'div',
@@ -72,16 +67,19 @@ const props = defineProps<ToastBarProps>()
 const animationStyle: ComputedRef<CSSProperties> = computed(() => {
   return props.toast.height
     ? getAnimationStyle(
-      props.toast.position || props.position || 'top-center',
-      props.toast.visible,
-    )
+        props.toast.position || props.position || 'top-center',
+        props.toast.visible,
+      )
     : { opacity: 0 }
 })
 
 const enterFactor = ref('0%')
 const exitFactor = ref('0%')
 
-function getAnimationStyle(position: ToastPosition, visible: boolean): CSSProperties {
+function getAnimationStyle(
+  position: ToastPosition,
+  visible: boolean,
+): CSSProperties {
   // 这里需要根据 prefersReducedMotion() 设置不同的动画效果
   const top = position.includes('top')
   const factor = top ? 1 : -1
@@ -95,8 +93,12 @@ function getAnimationStyle(position: ToastPosition, visible: boolean): CSSProper
 
   return {
     animation: visible
-      ? hasReduce ? 'fadeInAnimation' : 'enterAnimation 0.35s cubic-bezier(.21,1.02,.73,1) forwards'
-      : hasReduce ? 'fadeOutAnimation' : 'exitAnimation 0.4s forwards cubic-bezier(.06,.71,.55,1)',
+      ? hasReduce
+        ? 'fadeInAnimation'
+        : 'enterAnimation 0.35s cubic-bezier(.21,1.02,.73,1) forwards'
+      : hasReduce
+        ? 'fadeOutAnimation'
+        : 'exitAnimation 0.4s forwards cubic-bezier(.06,.71,.55,1)',
   }
 }
 </script>
@@ -112,7 +114,10 @@ function getAnimationStyle(position: ToastPosition, visible: boolean): CSSProper
   >
     <ToastIcon :toast="toast" />
 
-    <component :is="toast.message" v-if="(toast.message !== undefined) && (typeof toast.message !== 'string')" />
+    <component
+      :is="toast.message"
+      v-if="toast.message !== undefined && typeof toast.message !== 'string'"
+    />
     <!-- eslint-disable -->
     <Message v-else :ariaProps="toast.ariaProps">
       {{ toast.message }}

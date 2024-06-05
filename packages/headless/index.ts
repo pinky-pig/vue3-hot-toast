@@ -14,7 +14,7 @@ export type {
 } from '../core/types'
 
 export { resolveValue } from '../core/types'
-export { useToaster } from '../core/useToaster'
+export { useToaster } from '../core/use-toaster'
 export { useStore as useToasterStore } from '../core/store'
 
 export { toast }

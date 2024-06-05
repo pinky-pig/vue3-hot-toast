@@ -1,4 +1,4 @@
-import path, { resolve } from 'node:path'
+import path from 'node:path'
 import { defineConfig } from 'vitepress'
 import Components from 'unplugin-vue-components/vite'
 import AutoImport from 'unplugin-auto-import/vite'
@@ -41,21 +41,14 @@ export default defineConfig({
     },
     plugins: [
       AutoImport({
-        imports: [
-          'vue',
-          '@vueuse/core',
-        ],
+        imports: ['vue', '@vueuse/core'],
         dts: './.vitepress/typings/auto-imports.d.ts',
-        dirs: [
-          '../src/composables',
-        ],
+        dirs: ['../src/composables'],
         vueTemplate: true,
       }),
       Components({
         dts: './.vitepress/typings/components.d.ts',
-        dirs: [
-          '../src/components',
-        ],
+        dirs: ['../src/components'],
       }),
     ],
   },

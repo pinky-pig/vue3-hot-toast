@@ -2,8 +2,8 @@
   "name": "docs",
   "version": "1.0.0",
   "description": "",
-  "author": "",
   "license": "ISC",
+  "author": "",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",

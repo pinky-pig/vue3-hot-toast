@@ -1,5 +1,4 @@
-import type { Ref } from 'vue'
-import { onUnmounted, ref, toRef, watchEffect } from 'vue'
+import { type Ref, ref } from 'vue'
 import type { DefaultToastOptions, Toast, ToastType } from './types'
 
 const TOAST_LIMIT = 20
@@ -16,33 +15,33 @@ export enum ActionType {
 
 type Action =
   | {
-    type: ActionType.ADD_TOAST
-    toast: Toast
-  }
+      type: ActionType.ADD_TOAST
+      toast: Toast
+    }
   | {
-    type: ActionType.UPSERT_TOAST
-    toast: Toast
-  }
+      type: ActionType.UPSERT_TOAST
+      toast: Toast
+    }
   | {
-    type: ActionType.UPDATE_TOAST
-    toast: Partial<Toast>
-  }
+      type: ActionType.UPDATE_TOAST
+      toast: Partial<Toast>
+    }
   | {
-    type: ActionType.DISMISS_TOAST
-    toastId?: string
-  }
+      type: ActionType.DISMISS_TOAST
+      toastId?: string
+    }
   | {
-    type: ActionType.REMOVE_TOAST
-    toastId?: string
-  }
+      type: ActionType.REMOVE_TOAST
+      toastId?: string
+    }
   | {
-    type: ActionType.START_PAUSE
-    time: number
-  }
+      type: ActionType.START_PAUSE
+      time: number
+    }
   | {
-    type: ActionType.END_PAUSE
-    time: number
-  }
+      type: ActionType.END_PAUSE
+      time: number
+    }
 interface State {
   toasts: Toast[]
   pausedAt: number | undefined
@@ -91,28 +90,25 @@ export function reducer(state: State, action: Action): State {
 
       return {
         ...state,
-        toasts: state.toasts.map(t =>
+        toasts: state.toasts.map((t) =>
           t.id === action.toast.id ? { ...t, ...action.toast } : t,
         ),
       }
 
-    case ActionType.UPSERT_TOAST:
-    {
+    case ActionType.UPSERT_TOAST: {
       const { toast } = action
-      return state.toasts.find(t => t.id === toast.id)
+      return state.toasts.some((t) => t.id === toast.id)
         ? reducer(state, { type: ActionType.UPDATE_TOAST, toast })
         : reducer(state, { type: ActionType.ADD_TOAST, toast })
     }
 
-    case ActionType.DISMISS_TOAST:
-    {
+    case ActionType.DISMISS_TOAST: {
       const { toastId } = action
 
       // ! Side effects ! - This could be execrated into a dismissToast() action, but I'll keep it here for simplicity
       if (toastId) {
         addToRemoveQueue(toastId)
-      }
-      else {
+      } else {
         state.toasts.forEach((toast) => {
           addToRemoveQueue(toast.id)
         })
@@ -120,7 +116,7 @@ export function reducer(state: State, action: Action): State {
 
       return {
         ...state,
-        toasts: state.toasts.map(t =>
+        toasts: state.toasts.map((t) =>
           t.id === toastId || toastId === undefined
             ? {
                 ...t,
@@ -139,7 +135,7 @@ export function reducer(state: State, action: Action): State {
       }
       return {
         ...state,
-        toasts: state.toasts.filter(t => t.id !== action.toastId),
+        toasts: state.toasts.filter((t) => t.id !== action.toastId),
       }
 
     case ActionType.START_PAUSE:
@@ -148,14 +144,13 @@ export function reducer(state: State, action: Action): State {
         pausedAt: action.time,
       }
 
-    case ActionType.END_PAUSE:
-    {
+    case ActionType.END_PAUSE: {
       const diff = action.time - (state.pausedAt || 0)
 
       return {
         ...state,
         pausedAt: undefined,
-        toasts: state.toasts.map(t => ({
+        toasts: state.toasts.map((t) => ({
           ...t,
           pauseDuration: t.pauseDuration + diff,
         })),
@@ -165,12 +160,12 @@ export function reducer(state: State, action: Action): State {
 }
 
 export const defaultTimeouts: {
-  [key in ToastType]: number;
+  [key in ToastType]: number
 } = {
   blank: 4000,
   error: 4000,
   success: 2000,
-  loading: Infinity,
+  loading: Number.POSITIVE_INFINITY,
   custom: 4000,
 }
 
@@ -188,8 +183,7 @@ export function dispatch(action: Action) {
     memoryState = reduceMemoryState
     if (memoryState.toasts.length === 0) {
       listeners.value.splice(0, listeners.value.length)
-    }
-    else {
+    } else {
       listeners.value.push(0)
     }
   }
@@ -201,15 +195,15 @@ function areEqual(obj1: State, obj2: State) {
 
 // 创建一个 store ，每个 toast 都有一个
 export function useStore(toastOptions: DefaultToastOptions = {}): State {
-  const mergedToasts = memoryState.toasts.map(t => ({
+  const mergedToasts = memoryState.toasts.map((t) => ({
     ...toastOptions,
     ...toastOptions[t.type],
     ...t,
     duration:
-      t.duration
-      || toastOptions[t.type]?.duration
-      || toastOptions?.duration
-      || defaultTimeouts[t.type],
+      t.duration ||
+      toastOptions[t.type]?.duration ||
+      toastOptions?.duration ||
+      defaultTimeouts[t.type],
     style: {
       ...toastOptions.style,
       ...toastOptions[t.type]?.style,

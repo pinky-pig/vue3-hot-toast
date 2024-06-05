@@ -8,6 +8,7 @@ export default arvinn(
   [
     {
       rules: {
+        'import/no-default-export': 'off',
         'no-labels': 'off',
         'no-lone-blocks': 'off',
         'no-restricted-syntax': 'off',
@@ -18,6 +19,7 @@ export default arvinn(
         'ts/ban-types': 'off',
         'ts/no-invalid-this': 'off',
         'ts/no-unnecessary-type-constraint': 'off',
+        'unicorn/filename-case': 'off',
         'vue/no-template-shadow': 'off',
         'vue/no-v-text-v-html-on-component': 'off',
       },

@@ -8,7 +8,9 @@ import {
 } from 'radix-vue'
 import { cn } from '@/lib/utils'
 
-const props = defineProps<MenubarRootProps & { class?: HTMLAttributes['class'] }>()
+const props = defineProps<
+  MenubarRootProps & { class?: HTMLAttributes['class'] }
+>()
 const emits = defineEmits<MenubarRootEmits>()
 
 const delegatedProps = computed(() => {

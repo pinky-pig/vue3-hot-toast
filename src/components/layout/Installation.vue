@@ -11,8 +11,8 @@ async function handleCopyCode() {
 </script>
 
 <template>
-  <br>
-  <br>
+  <br />
+  <br />
   <h2>Installation</h2>
   <div class="relative">
     <Suspense>

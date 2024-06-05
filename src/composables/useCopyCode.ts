@@ -6,7 +6,7 @@ interface CopyCodeParams {
   checkIconRef: Ref<boolean>
 }
 
-export async function useCopyCode({ code, checkIconRef }: CopyCodeParams) {
+export async function useCopyCode({ checkIconRef, code }: CopyCodeParams) {
   const { copy } = useClipboard({
     source: code,
   })

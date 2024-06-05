@@ -84,15 +84,8 @@
   // ========== Extension configs ==========
   "emmet.showSuggestionsAsSnippets": true,
   "emmet.triggerExpansionOnTab": false,
-  "errorLens.enabledDiagnosticLevels": [
-    "warning",
-    "error"
-  ],
-  "errorLens.excludeBySource": [
-    "cSpell",
-    "Grammarly",
-    "eslint"
-  ],
+  "errorLens.enabledDiagnosticLevels": ["warning", "error"],
+  "errorLens.excludeBySource": ["cSpell", "Grammarly", "eslint"],
   // ESLint config: https://github.com/antfu/eslint-config
   "eslint.codeAction.showDocumentation": {
     "enable": true

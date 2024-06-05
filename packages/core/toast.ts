@@ -1,26 +1,30 @@
-import type {
-  DefaultToastOptions,
-  Renderable,
-  Toast,
-  ToastOptions,
-  ToastType,
-  ValueOrFunction,
-} from './types'
-import { resolveValue } from './types'
 import { genId } from './utils'
 import { ActionType, dispatch } from './store'
+import {
+  type DefaultToastOptions,
+  type Renderable,
+  type Toast,
+  type ToastOptions,
+  type ToastType,
+  type ValueOrFunction,
+  resolveValue,
+} from './types'
 
 type Message = ValueOrFunction<Renderable, Toast>
 
 type ToastHandler = (message: Message, options?: ToastOptions) => string
 
-function createToast(message: Message, type: ToastType = 'blank', opts?: ToastOptions): Toast {
+function createToast(
+  message: Message,
+  type: ToastType = 'blank',
+  opts?: ToastOptions,
+): Toast {
   return {
     createdAt: Date.now(),
     visible: true,
     type,
     ariaProps: {
-      'role': 'status',
+      role: 'status',
       'aria-live': 'polite',
     },
     message,
@@ -77,8 +81,8 @@ toast.promise = <T>(
       })
       return p
     })
-    .catch((e) => {
-      toast.error(resolveValue(msgs.error, e), {
+    .catch((error) => {
+      toast.error(resolveValue(msgs.error, error), {
         id,
         ...opts,
         ...opts?.error,

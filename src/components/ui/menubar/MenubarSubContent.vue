@@ -9,7 +9,9 @@ import {
 } from 'radix-vue'
 import { cn } from '@/lib/utils'
 
-const props = defineProps<MenubarSubContentProps & { class?: HTMLAttributes['class'] }>()
+const props = defineProps<
+  MenubarSubContentProps & { class?: HTMLAttributes['class'] }
+>()
 
 const emits = defineEmits<MenubarSubContentEmits>()
 
