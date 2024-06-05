@@ -27,6 +27,22 @@ function copy(sourcePath: string, targetPath: string) {
       process.exit(1)
     }
 
+    // 如果是 package.json 文件，则添加一些字段
+    if (sourcePath.endsWith('package.json')) {
+      const packageJson = JSON.parse(data)
+      packageJson.main = './pkg_name.es.js'
+      packageJson.module = './pkg_name.es.js'
+      packageJson.types = './playground.d.ts'
+      packageJson.exports = {
+        '.': {
+          types: './playground.d.ts',
+          require: './pkg_name.umd.cjs',
+          import: './pkg_name.es.js',
+        },
+      }
+      data = JSON.stringify(packageJson, null, 2)
+    }
+
     // 替换包名和仓库地址
     data = data.replaceAll('pkg_name', ENV.VITE_PKG_NAME)
     data = data.replaceAll('pkg_homepage', ENV.VITE_PKG_HOMEPAGE)

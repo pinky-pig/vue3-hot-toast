@@ -1,4 +1,4 @@
-<script lang="ts">
+<script setup lang="ts">
 import {
   type CSSProperties,
   type ComputedRef,
@@ -10,7 +10,47 @@ import {
 } from 'vue'
 import { prefersReducedMotion } from '../core/utils'
 import ToastIcon from './ToastIcon.vue'
-import type { Toast, ToastPosition } from '../core/types'
+import type { Toast, ToastBarProps, ToastPosition } from '../core/types'
+
+const props = defineProps<ToastBarProps>()
+
+const animationStyle: ComputedRef<CSSProperties> = computed(() => {
+  return props.toast.height
+    ? getAnimationStyle(
+        props.toast.position || props.position || 'top-center',
+        props.toast.visible,
+      )
+    : { opacity: 0 }
+})
+
+const enterFactor = ref('0%')
+const exitFactor = ref('0%')
+
+function getAnimationStyle(
+  position: ToastPosition,
+  visible: boolean,
+): CSSProperties {
+  // 这里需要根据 prefersReducedMotion() 设置不同的动画效果
+  const top = position.includes('top')
+  const factor = top ? 1 : -1
+
+  const hasReduce = prefersReducedMotion()
+
+  if (!hasReduce) {
+    enterFactor.value = `${factor * -200}%`
+    exitFactor.value = `${factor * -150}%`
+  }
+
+  return {
+    animation: visible
+      ? hasReduce
+        ? 'fadeInAnimation'
+        : 'enterAnimation 0.35s cubic-bezier(.21,1.02,.73,1) forwards'
+      : hasReduce
+        ? 'fadeOutAnimation'
+        : 'exitAnimation 0.4s forwards cubic-bezier(.06,.71,.55,1)',
+  }
+}
 
 const ToastBarBase = defineComponent((props, { slots }) => {
   // 这里是 setup
@@ -62,53 +102,6 @@ const Message = defineComponent(
     props: ['ariaProps'],
   },
 )
-</script>
-
-<script setup lang="ts">
-interface ToastBarProps {
-  toast: Toast
-  position?: ToastPosition
-  style?: CSSProperties
-}
-const props = defineProps<ToastBarProps>()
-
-const animationStyle: ComputedRef<CSSProperties> = computed(() => {
-  return props.toast.height
-    ? getAnimationStyle(
-        props.toast.position || props.position || 'top-center',
-        props.toast.visible,
-      )
-    : { opacity: 0 }
-})
-
-const enterFactor = ref('0%')
-const exitFactor = ref('0%')
-
-function getAnimationStyle(
-  position: ToastPosition,
-  visible: boolean,
-): CSSProperties {
-  // 这里需要根据 prefersReducedMotion() 设置不同的动画效果
-  const top = position.includes('top')
-  const factor = top ? 1 : -1
-
-  const hasReduce = prefersReducedMotion()
-
-  if (!hasReduce) {
-    enterFactor.value = `${factor * -200}%`
-    exitFactor.value = `${factor * -150}%`
-  }
-
-  return {
-    animation: visible
-      ? hasReduce
-        ? 'fadeInAnimation'
-        : 'enterAnimation 0.35s cubic-bezier(.21,1.02,.73,1) forwards'
-      : hasReduce
-        ? 'fadeOutAnimation'
-        : 'exitAnimation 0.4s forwards cubic-bezier(.06,.71,.55,1)',
-  }
-}
 </script>
 
 <template>

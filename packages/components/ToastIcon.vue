@@ -1,15 +1,17 @@
-<script lang="ts">
+<script setup lang="ts">
 import { defineComponent, h } from 'vue'
 import LoaderIcon, { type LoaderTheme } from './Loader.vue'
 import CheckmarkIcon, { type CheckmarkTheme } from './Checkmark.vue'
 import ErrorIcon, { type ErrorTheme } from './Error.vue'
-import type { Toast } from '../core/types'
-
+import type { Toast, ToastIconProps } from '../core/types'
 export type IconThemes = Partial<{
   success: CheckmarkTheme
   error: ErrorTheme
   loading: LoaderTheme
 }>
+
+const props = defineProps<ToastIconProps>()
+
 const StatusWrapper = defineComponent((props, { slots }) => {
   return () => {
     return h(
@@ -45,14 +47,6 @@ const AnimatedIconWrapper = defineComponent((props, { slots }) => {
     )
   }
 })
-</script>
-
-<script setup lang="ts">
-interface ToastIconProps {
-  toast: Toast
-}
-
-const props = defineProps<ToastIconProps>()
 </script>
 
 <template>

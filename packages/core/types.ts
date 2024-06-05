@@ -85,3 +85,13 @@ export interface ToastWrapperProps {
 export interface ToastWrapperEmits {
   onHeightUpdate: (id: string, height: number) => void
 }
+
+export interface ToastBarProps {
+  toast: Toast
+  position?: ToastPosition
+  style?: CSSProperties
+}
+
+export interface ToastIconProps {
+  toast: Toast
+}
