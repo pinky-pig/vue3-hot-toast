@@ -13,15 +13,24 @@
     "vue3"
   ],
   "license": "MIT",
-  "homepage": "https://github.com/pinky-pig/vue3-hot-toast",
+  "homepage": "pkg_homepage",
   "repository": {
     "type": "git",
-    "url": "https://github.com/pinky-pig/vue3-hot-toast"
+    "url": "pkg_repository_url"
   },
   "author": "arvin",
   "files": [
     "*"
   ],
+  "main": "./pkg_name.es.js",
+  "module": "./pkg_name.es.js",
+  "types": "./playground.d.ts",
+  "exports": {
+    ".": {
+      "require": "./pkg_name.umd.cjs",
+      "import": "./pkg_name.es.js"
+    }
+  },
   "publishConfig": {
     "registry": "https://registry.npmjs.org",
     "access": "public"
@@ -29,8 +38,10 @@
   "scripts": {
     "dev": "vite"
   },
-  "devDependencies": {
-    "typescript": "^4.9.3",
+  "peerDependencies": {
     "vue": "^3.2.45"
+  },
+  "devDependencies": {
+    "typescript": "^4.9.3"
   }
 }

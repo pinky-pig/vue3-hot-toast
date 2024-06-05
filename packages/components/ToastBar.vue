@@ -1,5 +1,13 @@
 <script lang="ts">
-import { type CSSProperties, type Slots, defineComponent, h } from 'vue'
+import {
+  type CSSProperties,
+  type ComputedRef,
+  type Slots,
+  computed,
+  defineComponent,
+  h,
+  ref,
+} from 'vue'
 import { prefersReducedMotion } from '../core/utils'
 import ToastIcon from './ToastIcon.vue'
 import type { Toast, ToastPosition } from '../core/types'

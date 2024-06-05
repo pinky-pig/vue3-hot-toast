@@ -33,8 +33,8 @@ export default defineConfig(({ mode }) => {
           output: [
             {
               format: 'umd',
-              name: `${process.env.VITE_PKG_NAME}.umd.js`,
-              entryFileNames: `${process.env.VITE_PKG_NAME}.umd.js`,
+              name: `${process.env.VITE_PKG_NAME}.umd.cjs`,
+              entryFileNames: `${process.env.VITE_PKG_NAME}.umd.cjs`,
             },
             {
               format: 'es',

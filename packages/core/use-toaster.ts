@@ -1,5 +1,5 @@
 /* eslint-disable array-callback-return */
-import { watchEffect } from 'vue'
+import { nextTick, watchEffect } from 'vue'
 import { ActionType, dispatch, useStore } from './store'
 import { toast } from './toast'
 import type { DefaultToastOptions, Toast, ToastPosition } from './types'

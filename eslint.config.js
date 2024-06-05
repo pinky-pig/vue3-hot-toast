@@ -7,6 +7,9 @@ import { arvinn } from '@arvinn/eslint-config'
 export default arvinn(
   [
     {
+      ignores: ['output-lib/*'],
+    },
+    {
       rules: {
         'import/no-default-export': 'off',
         'no-labels': 'off',

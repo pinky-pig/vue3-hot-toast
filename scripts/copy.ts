@@ -1,8 +1,12 @@
-import path from 'node:path'
+import path, { dirname } from 'node:path'
 import fs from 'node:fs'
+import { fileURLToPath } from 'node:url'
 import { loadEnv } from 'vite'
 
 const ENV = { ...loadEnv('development', process.cwd()) }
+
+const __filename = fileURLToPath(import.meta.url)
+const __dirname = dirname(__filename)
 
 const sourcePath1 = path.resolve(__dirname, '../packages/package.json') // 修改为实际的第一个源文件路径
 const destinationPath1 = path.resolve(__dirname, '../output-lib/package.json') // 修改为实际的第一个目标文件路径

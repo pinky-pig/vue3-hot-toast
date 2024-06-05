@@ -1,11 +1,11 @@
 <script setup lang="ts">
+import { type CSSProperties, ref, watch } from 'vue'
 import { useToaster } from '../core/use-toaster'
 import { prefersReducedMotion } from '../core/utils'
 import { listeners } from '../core/store'
 import ToastWrapper from './ToastWrapper.vue'
 import ToastBar from './ToastBar.vue'
 import type { ToastPosition, ToasterProps } from '../core/types'
-import type { CSSProperties } from 'vue'
 
 /**
  * 1. 命令式 custom

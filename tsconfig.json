@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "target": "esnext",
+    "target": "ESNext",
     "jsx": "preserve",
     "lib": ["DOM", "ESNext"],
     "baseUrl": ".",
@@ -28,7 +28,8 @@
     "src/typings/**/*.d.ts",
     "vite.config.*",
     "components.d.ts",
-    "auto-imports.d.ts"
+    "auto-imports.d.ts",
+    "scripts/**/*.ts"
   ],
-  "exclude": ["dist", "node_modules", "eslint.config.js"]
+  "exclude": ["output-lib", "dist", "node_modules", "eslint.config.js"]
 }
