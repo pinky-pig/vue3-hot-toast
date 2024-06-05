@@ -1,6 +1,6 @@
 {
   "name": "vue3-hot-toast",
-  "version": "0.0.0",
+  "version": "0.0.1-beta.1",
   "private": false,
   "type": "module",
   "keywords": [
@@ -22,15 +22,6 @@
   "files": [
     "*"
   ],
-  "main": "./pkg_name.es.js",
-  "module": "./pkg_name.es.js",
-  "types": "./playground.d.ts",
-  "exports": {
-    ".": {
-      "require": "./pkg_name.umd.cjs",
-      "import": "./pkg_name.es.js"
-    }
-  },
   "publishConfig": {
     "registry": "https://registry.npmjs.org",
     "access": "public"
