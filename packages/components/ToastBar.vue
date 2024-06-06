@@ -118,6 +118,7 @@ const Message = defineComponent(
     <component
       :is="toast.message"
       v-if="toast.message !== undefined && typeof toast.message !== 'string'"
+      :t="toast"
     />
     <!-- eslint-disable -->
     <Message v-else :ariaProps="toast.ariaProps">

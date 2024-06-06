@@ -13,21 +13,19 @@ import type { ToastPosition, ToasterProps } from '../core/types'
  * 3. 插槽 toastBar
  */
 
-const { reverseOrder, position, toastOptions, gutter } = withDefaults(
-  defineProps<ToasterProps>(),
-  {
-    position: 'top-center',
-  },
-)
+// const { reverseOrder, position, toastOptions, gutter } = withDefaults(
+const props = withDefaults(defineProps<ToasterProps>(), {
+  position: 'top-center',
+})
 
 const DEFAULT_OFFSET = 16
 
-const store = ref(useToaster(toastOptions))
+const store = ref(useToaster(props.toastOptions))
 
 watch(
   listeners,
   () => {
-    store.value = useToaster(toastOptions)
+    store.value = useToaster(props.toastOptions)
   },
   {
     deep: true,
@@ -78,37 +76,36 @@ function getPositionStyle(
     @mouseenter="store.handlers.startPause"
     @mouseleave="store.handlers.endPause"
   >
-    {{ store.toasts.length }}
     <ToastWrapper
       v-for="t in store.toasts"
       :id="t.id"
       :key="t.id"
       :style="
         getPositionStyle(
-          t.position || position,
+          t.position || props.position,
           store.handlers.calculateOffset(t, {
             reverseOrder,
             gutter,
-            defaultPosition: position,
+            defaultPosition: props.position,
           }),
         )
       "
       :class="t.visible ? 'active-class' : ''"
       @on-height-update="store.handlers.updateHeight"
     >
-      <component :is="t.message" v-if="t.type === 'custom'" />
+      <component :is="t.message" v-if="t.type === 'custom'" :t="t" />
       <slot
         v-else-if="$slots.default"
         :toast="t"
-        :position="t.position || position"
+        :position="t.position || props.position"
       />
       <slot
         v-else
         :toast="t"
-        :position="t.position || position"
+        :position="t.position || props.position"
         name="toastBar"
       >
-        <ToastBar :toast="t" :position="t.position || position" />
+        <ToastBar :toast="t" :position="t.position || props.position" />
       </slot>
     </ToastWrapper>
   </div>

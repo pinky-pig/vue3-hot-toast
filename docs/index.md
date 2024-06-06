@@ -3,7 +3,7 @@ layout: false
 ---
 
 <script setup>
-import V3BentoHome from './pages/index.vue'
+import Index from './pages/index.vue'
 </script>
 
-<V3BentoHome />
+<Index />

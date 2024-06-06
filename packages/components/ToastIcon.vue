@@ -63,6 +63,7 @@ const AnimatedIconWrapper = defineComponent((props, { slots }) => {
     v-else-if="
       props.toast.icon !== undefined && typeof props.toast.icon !== 'string'
     "
+    :t="props.toast"
   />
 
   <div v-else-if="props.toast.type === 'blank'" />
