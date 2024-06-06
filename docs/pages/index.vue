@@ -157,7 +157,7 @@ function triggerToast() {
       :reverse-order="reverse"
       :toast-options="{}"
     />
-    <div className="container flex justify-end -mt-10 pointer-events-none">
+    <div class="container flex justify-end -mt-10 pointer-events-none">
       <div class-name="transform translate-x-20" v-html="Butter2" />
     </div>
     <Footer />

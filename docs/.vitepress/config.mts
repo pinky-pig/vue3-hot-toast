@@ -11,7 +11,7 @@ const ENV = { ...loadEnv('development', process.cwd()) }
 export default defineConfig({
   title: ENV.VITE_PKG_NAME,
   description: 'Smoking hot Vue notifications',
-  head: [['link', { rel: 'icon', href: '/public/favicon.svg' }]],
+  head: [['link', { rel: 'icon', href: '/favicon.svg' }]],
 
   themeConfig: {
     // 导航上的logo
@@ -52,10 +52,9 @@ export default defineConfig({
         dirs: ['../src/composables'],
         vueTemplate: true,
       }),
-      Components({
-        dts: './.vitepress/typings/components.d.ts',
-        dirs: ['../src/components'],
-      }),
     ],
+    build: {
+      chunkSizeWarningLimit: 2000,
+    },
   },
 })

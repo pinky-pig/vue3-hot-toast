@@ -20,7 +20,6 @@
     "fetch-vsc-settings": "tsx scripts/vsc-settings.ts",
     "docs:dev": "vitepress dev docs",
     "docs:build": "vitepress build docs",
-    "pnpm": "^8.15.4",
     "docs:preview": "vitepress preview docs"
   },
   "dependencies": {

@@ -15,5 +15,3 @@
     </div>
   </button>
 </template>
-
-<style scoped></style>

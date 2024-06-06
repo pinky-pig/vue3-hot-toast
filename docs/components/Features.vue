@@ -24,5 +24,3 @@ const features = ref([
     </div>
   </div>
 </template>
-
-<style scoped></style>

@@ -236,28 +236,26 @@ function handleToggleToast(t: ExampleType) {
 </script>
 
 <template>
-  <section className="grid md:grid-cols-2 gap-4">
-    <div className="flex items-center">
-      <div
-        className="w-full grid grid-cols-2 gap-2 bg-toast-100  rounded-xl p-4"
-      >
-        <div v-for="e in examples" :key="e.title" @click="handleToggleToast(e)">
-          <EmojiButton :key="e.title">
-            <template #emoji>
-              {{ e.emoji }}
-            </template>
+  <section class="grid md:grid-cols-2 gap-4">
+    <div class="flex items-center">
+      <div class="w-full grid grid-cols-2 gap-2 bg-toast-100 rounded-xl p-4">
+        <EmojiButton
+          v-for="e in examples"
+          :key="e.title"
+          @click="handleToggleToast(e)"
+        >
+          <template #emoji>
+            {{ e.emoji }}
+          </template>
 
-            {{ e.title }}
-          </EmojiButton>
-        </div>
+          {{ e.title }}
+        </EmojiButton>
       </div>
     </div>
-    <div className="md:h-72 w-full overflow-auto rounded-lg">
+    <div class="md:h-72 w-full overflow-auto rounded-lg">
       <Suspense>
         <Code :code="snippet" lang="javascript" />
       </Suspense>
     </div>
   </section>
 </template>
-
-<style scoped></style>

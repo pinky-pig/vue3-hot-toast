@@ -96,12 +96,12 @@ const codeContent = computed(
 </script>
 
 <template>
-  <section className="flex flex-col md:grid grid-cols-1 md:grid-cols-3 gap-2">
+  <section class="flex flex-col md:grid grid-cols-1 md:grid-cols-3 gap-2">
     <Suspense>
       <Code :code="codeContent" lang="html" />
     </Suspense>
     <div
-      className="order-first md:order-none col-span-2 grid grid-cols-3 justify-between bg-toast-100 rounded-xl gap-x-2 gap-y-4 p-2 md:p-4"
+      class="order-first md:order-none col-span-2 bg-toast-100 rounded-xl gap-x-2 gap-y-4 p-2 md:p-4 grid grid-cols-3 justify-between"
     >
       <button
         v-for="item in positions"
@@ -115,11 +115,11 @@ const codeContent = computed(
         "
         @click="handleToggleToast(item)"
       >
-        <span className="mr-2">{{ item }}</span>
+        <span class="mr-2">{{ item }}</span>
       </button>
     </div>
     <div
-      className="col-start-2 col-span-2 flex justify-center my-4"
+      class="col-start-2 col-span-2 flex justify-center my-4"
       @click="reverseIt"
     >
       <EmojiButton class="max-w-[200px]">
