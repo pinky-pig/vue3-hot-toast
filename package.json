@@ -20,6 +20,7 @@
     "fetch-vsc-settings": "tsx scripts/vsc-settings.ts",
     "docs:dev": "vitepress dev docs",
     "docs:build": "vitepress build docs",
+    "pnpm": "^8.15.4",
     "docs:preview": "vitepress preview docs"
   },
   "dependencies": {
@@ -53,6 +54,7 @@
     "jsdom": "^24.1.0",
     "lint-staged": "^15.2.5",
     "lucide-vue-next": "^0.383.0",
+    "pnpm": "^8.15.4",
     "postcss": "^8.4.38",
     "prettier": "^3.3.0",
     "radix-vue": "^1.8.3",
