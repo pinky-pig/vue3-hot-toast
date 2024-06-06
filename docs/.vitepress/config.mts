@@ -11,9 +11,14 @@ const ENV = { ...loadEnv('development', process.cwd()) }
 export default defineConfig({
   title: ENV.VITE_PKG_NAME,
   description: 'Smoking hot Vue notifications',
-  head: [['link', { rel: 'icon', href: '/favicon.svg' }]],
+  head: [['link', { rel: 'icon', href: '/public/favicon.svg' }]],
 
   themeConfig: {
+    // 导航上的logo
+    logo: '/logo-small.svg',
+    // 隐藏logo右边的标题
+    siteTitle: false,
+
     // https://vitepress.dev/reference/default-theme-config
     nav: [
       { text: 'Home', link: '/' },
@@ -31,7 +36,7 @@ export default defineConfig({
     ],
 
     socialLinks: [
-      { icon: 'github', link: 'https://github.com/vuejs/vitepress' },
+      { icon: 'github', link: 'https://github.com/pinky-pig/vue3-hot-toast' },
     ],
   },
   vite: {
