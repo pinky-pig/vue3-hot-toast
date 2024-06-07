@@ -98,7 +98,7 @@ const codeContent = computed(
 <template>
   <section class="flex flex-col md:grid grid-cols-1 md:grid-cols-3 gap-2">
     <Suspense>
-      <Code :code="codeContent" lang="html" />
+      <Code class="!h-36 md:h-full" :code="codeContent" lang="html" />
     </Suspense>
     <div
       class="order-first md:order-none col-span-2 bg-toast-100 rounded-xl gap-x-2 gap-y-4 p-2 md:p-4 grid grid-cols-3 justify-between"

@@ -62,7 +62,9 @@ function triggerToast() {
 
 <template>
   <div class="overflow-x-hidden">
-    <header class="bg-gradient-to-b from-toast-50 to-white bg-opacity-10">
+    <header
+      class="text-[#3c3c42] bg-gradient-to-b from-toast-50 to-white bg-opacity-10"
+    >
       <div class="container flex flex-col items-center relative">
         <div
           class="absolute -left-24 md:left-24 transition-opacity duration-200"
@@ -126,7 +128,7 @@ function triggerToast() {
           </a>
         </div>
         <div class="text-toast-600 my-2">
-          <a href="/api/props" class="underline"> Documentation </a>
+          <a href="/overview/get-started" class="underline"> Documentation </a>
           {{ ' · ' }}
           <span>v{{ version }}</span>
         </div>

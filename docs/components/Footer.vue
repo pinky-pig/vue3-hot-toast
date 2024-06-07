@@ -8,7 +8,7 @@
       <a class="underline" href="https://github.com/pinky-pig/vue3-hot-toast">
         GitHub
       </a>
-      <a href="/api/props" class="underline"> Docs </a>
+      <a href="/overview/get-started" class="underline"> Docs </a>
       <a class="underline" href="https://twitter.com/ArvinnWang"> Twitter </a>
     </div>
     <div class="text-toast-600">

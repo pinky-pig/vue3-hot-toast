@@ -112,3 +112,11 @@ async function handleCopyCode() {
     </button>
   </div>
 </template>
+
+<style scoped>
+:deep(.shiki) {
+  padding: 10px 62px 10px 12px !important;
+  background-color: #351e11 !important;
+  color: #d6ceff !important;
+}
+</style>

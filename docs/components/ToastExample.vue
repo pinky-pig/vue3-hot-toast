@@ -252,7 +252,7 @@ function handleToggleToast(t: ExampleType) {
         </EmojiButton>
       </div>
     </div>
-    <div class="md:h-72 w-full overflow-auto rounded-lg">
+    <div class="h-36 md:h-72 w-full overflow-auto rounded-lg">
       <Suspense>
         <Code :code="snippet" lang="javascript" />
       </Suspense>
