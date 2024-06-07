@@ -1,6 +1,6 @@
 # `<Toaster />` API
 
-This component will render all toasts. Alternatively you can create own renderer with the headless [`useToaster()`](/api/use-toaster) hook.
+This component will render all toasts.
 
 ## Available options
 
