@@ -3,7 +3,8 @@
 > Add beautiful notifications to your Vue app with [vue3-hot-toast](https://github.com/pinky-pig/vue3-hot-toast).
 
 ## Preview
-![vht](https://cdn.jsdelivr.net/gh/pinky-pig/pic-bed/imagesvht.mp4)
+
+https://cdn.jsdelivr.net/gh/pinky-pig/pic-bed/imagesvht.mp4
 
 ## Website
 Docs: <https://https://vue3-hot-toast.netlify.app//>  
