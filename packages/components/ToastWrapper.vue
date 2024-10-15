@@ -11,11 +11,14 @@ onMounted(() => {
   if (toastWrapper.value) {
     updateHeight()
 
-    new MutationObserver(updateHeight).observe(toastWrapper.value, {
-      subtree: true,
-      childList: true,
-      characterData: true,
-    })
+    new MutationObserver(updateHeight).observe(
+      toastWrapper.value as HTMLElement,
+      {
+        subtree: true,
+        childList: true,
+        characterData: true,
+      },
+    )
   }
 
   function updateHeight() {

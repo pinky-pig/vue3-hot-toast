@@ -590,6 +590,3 @@ declare module 'vue' {
     readonly whenever: UnwrapRef<typeof import('@vueuse/core')['whenever']>
   }
 }
- readonly whenever: UnwrapRef<typeof import('@vueuse/core')['whenever']>
-  }
-}
